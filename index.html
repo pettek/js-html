@@ -1,0 +1,142 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body style="padding-top: 2em;">
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">Hello, world!</h1>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called a
+            jumbotron and three supporting pieces of content. Use it as a starting point to create something more
+            unique.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form style="width: 100%">
+                <div class="form-group row">
+                    <label for="full-name" class="col-4 col-form-label">Name</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text" id="full-name">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="phone" class="col-4 col-form-label">Telephone number</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text" id="phone">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="address" class="col-4 col-form-label">Address</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text" id="address">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="address" class="col-4 col-form-label">Programming languages</label>
+                    <div class="col-8">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="languages[]" value="PHP"> PHP
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="languages[]" value="HTML"> HTML
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="languages[]" value="CSS"> CSS
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="languages[]" value="JS"> JS
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="notes" class="col-4 col-form-label">Notes</label>
+                    <div class="col-8">
+                        <textarea class="form-control" name="notes" id="notes"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="address" class="col-4 col-form-label">Work Permit?</label>
+                    <div class="col-8">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="work-permit"  value="yes">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="work-permit"  value="no">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-block" id="submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+
+    <footer>
+        <p>&copy; Company 2017</p>
+    </footer>
+</div> <!-- /container -->
+</body>
+</html>

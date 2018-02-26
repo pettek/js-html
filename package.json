@@ -1,0 +1,27 @@
+{
+  "name": "js-html",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --env.dev --inline --progress --config ./webpack.config.js",
+    "build": "webpack --config ./webpack.config.js",
+    "precommit": "",
+    "lint": "eslint --max-warnings 0 ./src"
+  },
+  "author": "Piotr Olbrot",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "@babel/runtime": "^7.0.0-beta.40",
+    "babel-loader": "^8.0.0-beta.0",
+    "eslint": "^4.18.1",
+    "html-webpack-plugin": "^2.30.1",
+    "husky": "^0.14.3",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
+  }
+}
