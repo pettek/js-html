@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
-<body style="padding-top: 2em;">
+<body style="padding-top: 2em;" id="root">
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
@@ -55,25 +55,25 @@
     <!-- Example row of columns -->
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <form style="width: 100%">
+            <form style="width: 100%" id="user-submit-form">
                 <div class="form-group row">
                     <label for="full-name" class="col-4 col-form-label">Name</label>
                     <div class="col-8">
-                        <input class="form-control" type="text" id="full-name">
+                        <input class="form-control" type="text" id="full-name" required>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="phone" class="col-4 col-form-label">Telephone number</label>
                     <div class="col-8">
-                        <input class="form-control" type="text" id="phone">
+                        <input class="form-control" type="text" id="phone" required>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="address" class="col-4 col-form-label">Address</label>
                     <div class="col-8">
-                        <input class="form-control" type="text" id="address">
+                        <input class="form-control" type="text" id="address" required>
                     </div>
                 </div>
 
@@ -128,7 +128,7 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary btn-block" id="submit-btn">Submit</button>
+                <button type="submit" class="btn btn-primary btn-block" id="submit-btn">Submit</button>
             </form>
         </div>
     </div>
