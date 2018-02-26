@@ -1,5 +1,6 @@
-import { User }        from '../user';
-import { FormHandler } from './form-handler';
+import { User }              from '../user';
+import { FormHandler }       from './form-handler';
+import { UserFormValidator } from './user-form-validator';
 
 export class UserFormHandler extends FormHandler {
   readForm () {
@@ -8,20 +9,34 @@ export class UserFormHandler extends FormHandler {
       telephone: this.form.querySelector('#phone').value,
       address: this.form.querySelector('#address').value,
       notes: this.form.querySelector('#notes').value,
-      languages: this.form.querySelectorAll('[name="languages[]"]:checked'),
+      programmingLanguages: [].slice.call(this.form.querySelectorAll(
+        '[name="languages[]"]:checked')).map(checkbox => checkbox.value),
       isWorkPermitNeeded: this.form.querySelector(
-        '[name="work-permit"]:checked'),
+        '[name="work-permit"]:checked') ? this.form.querySelector(
+        '[name="work-permit"]:checked').value === 'yes' : false,
     };
   }
 
   create (formData) {
+    console.log(formData);
+    const validator = new UserFormValidator(formData,
+      {
+        name: 'required|min:6|max:40',
+        telephone: 'required|number',
+        programmingLanguages: 'required',
+        isWorkPermitNeeded: 'required'
+      },
+    );
+    if (validator.validate() === false) {
+      return null;
+    }
     const user = new User;
 
     user.name = formData.name;
     user.telephone = formData.telephone;
     user.address = formData.address;
     user.notes = formData.notes;
-    user.languages = formData.languages;
+    user.programmingLanguages = formData.programmingLanguages;
     user.isWorkPermitNeeded = formData.isWorkPermitNeeded;
 
     return user;

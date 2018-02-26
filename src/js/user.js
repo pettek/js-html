@@ -4,9 +4,9 @@ export class User {
     this.lastName = '';
     this.telephone = '';
     this.address = '';
-    this._programmingLanguages = [];
+    this.programmingLanguages = [];
     this.notes = '';
-    this._isWorkPermitNeeded = false;
+    this.isWorkPermitNeeded = false;
     this.index = 0;
   }
 
@@ -18,17 +18,5 @@ export class User {
     const nameArray = fullName.split(' ');
     this.firstName = nameArray[0];
     this.lastName = nameArray[1];
-  }
-
-  set languages (languages) {
-    for (let i = 0; i < languages.length; i++) {
-      this._programmingLanguages.push(languages[i].value);
-    }
-  }
-
-  set isWorkPermitNeeded (workPermit) {
-    if(workPermit) {
-      this._isWorkPermitNeeded = (workPermit.value === 'yes');
-    }
   }
 }

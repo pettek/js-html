@@ -1,8 +1,9 @@
 export class FormHandler {
-  readForm() {
+  readForm () {
     return {};
   }
-  create(formData) {}
+
+  create (formData) {}
 
   constructor (form) {
     this.form = form;
