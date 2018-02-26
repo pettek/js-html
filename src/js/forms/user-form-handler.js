@@ -3,6 +3,10 @@ import { FormHandler }       from './form-handler';
 import { UserFormValidator } from './user-form-validator';
 
 export class UserFormHandler extends FormHandler {
+  /**
+   *
+   * @returns {{name, telephone, address, notes, programmingLanguages: any[], isWorkPermitNeeded: boolean}}
+   */
   readForm () {
     return {
       name: this.form.querySelector('#full-name').value,
@@ -17,6 +21,11 @@ export class UserFormHandler extends FormHandler {
     };
   }
 
+  /**
+   *
+   * @param formData
+   * @returns {*}
+   */
   create (formData) {
     console.log(formData);
     const validator = new UserFormValidator(formData,
@@ -24,7 +33,7 @@ export class UserFormHandler extends FormHandler {
         name: 'required|min:6|max:40',
         telephone: 'required|number',
         programmingLanguages: 'required',
-        isWorkPermitNeeded: 'required'
+        isWorkPermitNeeded: 'required',
       },
     );
     if (validator.validate() === false) {

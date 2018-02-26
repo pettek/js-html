@@ -1,9 +1,18 @@
 export class UserFormValidator {
+  /**
+   *
+   * @param data
+   * @param rules
+   */
   constructor (data, rules) {
     this.data = data;
     this.rules = rules;
   }
 
+  /**
+   *
+   * @returns {boolean}
+   */
   validate () {
     const keys = Object.keys(this.rules);
 
@@ -28,7 +37,8 @@ export class UserFormValidator {
             break;
           case 'max':
             if (data.length > limit) {
-              alert(keys[i] + ' must not have more than ' + limit + ' characters');
+              alert(keys[i] + ' must not have more than ' + limit +
+                ' characters');
               return false;
             }
             break;

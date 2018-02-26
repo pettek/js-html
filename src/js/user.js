@@ -1,4 +1,7 @@
 export class User {
+  /**
+   *
+   */
   constructor () {
     this.firstName = '';
     this.lastName = '';
@@ -10,10 +13,18 @@ export class User {
     this.index = 0;
   }
 
+  /**
+   *
+   * @returns {string}
+   */
   get name () {
     return this.firstName + ' ' + this.lastName;
   }
 
+  /**
+   *
+   * @param fullName
+   */
   set name (fullName) {
     const nameArray = fullName.split(' ');
     this.firstName = nameArray[0];
