@@ -35,7 +35,7 @@ export class FormValidator {
         // Check the type of the rule and then perform a check
         switch (type) {
           case 'required':
-            if (!data || data.length === 0) {
+            if (!data || data.length === 0 ) {
               errorArray.push(keys[i] + ' is required');
               status = false;
             }

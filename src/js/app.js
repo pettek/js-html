@@ -16,7 +16,10 @@ export class App {
   run () {
     const userForm = new UserFormHandler(
       this.root.querySelector('#user-submit-form'));
-    userForm.listen(user => console.log(user));
+
+    userForm.getUserPromise().then(function (user) {
+      console.log(user);
+    });
 
     return this;
   }

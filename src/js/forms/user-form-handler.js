@@ -1,6 +1,7 @@
-import { User }          from '../user';
-import { FormHandler }   from './form-handler';
-import { FormValidator } from './form-validator';
+import { User }        from '../user';
+import { FormHandler } from './form-handler';
+
+// import { FormValidator } from './form-validator';
 
 export class UserFormHandler extends FormHandler {
 
@@ -36,23 +37,24 @@ export class UserFormHandler extends FormHandler {
    */
   create (formData) {
 
-    // Validation step
-    const validator = new FormValidator(formData,
-      {
-        name: 'required|min:6|max:40',
-        telephone: 'required|number',
-        programmingLanguages: 'required',
-        isWorkPermitNeeded: 'required',
-      },
-    );
-    const errorHandler = (errors) => (errors.map(error => console.log(error)));
+    /*
+     // Validation step
+     const validator = new FormValidator(formData,
+     {
+     name: 'required|min:6|max:40',
+     telephone: 'required|number',
+     programmingLanguages: 'required',
+     },
+     );
+     const errorHandler = (errors) => (errors.map(error => console.log(error)));
 
-    if (validator.validate(errorHandler) === false) {
-      // Return null on validation failure
-      return null;
-    }
+     if (validator.validate(errorHandler) === false) {
+     // Return null on validation failure
+     return null;
+     }
 
-    // Will go here, if validation is successful
+     // Will go here, if validation is successful
+     */
     const user = new User;
 
     user.name = formData.name;
@@ -63,5 +65,22 @@ export class UserFormHandler extends FormHandler {
     user.isWorkPermitNeeded = formData.isWorkPermitNeeded;
 
     return user;
+  }
+
+  /**
+   * Add submit event listener on a form provided in the constructor. Returns a
+   * Promise that will be resolved on submitting a form.
+   * @returns {Promise<any>}
+   */
+  getUserPromise () {
+    const object = this;
+    return new Promise(function (resolve) {
+      object.form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        resolve(object.create(
+          object.readForm(),
+        ));
+      });
+    });
   }
 }
