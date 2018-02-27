@@ -1,6 +1,6 @@
 export class User {
   /**
-   *
+   * @constructor Represents a User
    */
   constructor () {
     this.firstName = '';
@@ -10,11 +10,10 @@ export class User {
     this.programmingLanguages = [];
     this.notes = '';
     this.isWorkPermitNeeded = false;
-    this.index = 0;
   }
 
   /**
-   *
+   * Create a correct full name using object properties
    * @returns {string}
    */
   get name () {
@@ -22,7 +21,7 @@ export class User {
   }
 
   /**
-   *
+   * Split the fullName on the white space and assign properties
    * @param fullName
    */
   set name (fullName) {

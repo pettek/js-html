@@ -1,9 +1,13 @@
-import { User }              from '../user';
-import { FormHandler }       from './form-handler';
-import { UserFormValidator } from './user-form-validator';
+import { User }          from '../user';
+import { FormHandler }   from './form-handler';
+import { FormValidator } from './form-validator';
 
 export class UserFormHandler extends FormHandler {
+
   /**
+   * readFrom reads the data from the form fields and organize them into an
+   * object. This function also performs some basic transformation of form data
+   * to make it either a string, an array or boolean (not NodeList for example)
    *
    * @returns {{name, telephone, address, notes, programmingLanguages: any[], isWorkPermitNeeded: boolean}}
    */
@@ -22,13 +26,18 @@ export class UserFormHandler extends FormHandler {
   }
 
   /**
+   * This function accepts previously formed object and re-writes data into a
+   * User object and returns it. There is an additional step of validation that
+   * is optional and will result in returning null instead of a User object if
+   * criteria are not met
    *
    * @param formData
    * @returns {*}
    */
   create (formData) {
-    console.log(formData);
-    const validator = new UserFormValidator(formData,
+
+    // Validation step
+    const validator = new FormValidator(formData,
       {
         name: 'required|min:6|max:40',
         telephone: 'required|number',
@@ -36,9 +45,14 @@ export class UserFormHandler extends FormHandler {
         isWorkPermitNeeded: 'required',
       },
     );
-    if (validator.validate() === false) {
+    const errorHandler = (errors) => (errors.map(error => console.log(error)));
+
+    if (validator.validate(errorHandler) === false) {
+      // Return null on validation failure
       return null;
     }
+
+    // Will go here, if validation is successful
     const user = new User;
 
     user.name = formData.name;

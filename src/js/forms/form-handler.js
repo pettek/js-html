@@ -1,6 +1,6 @@
 export class FormHandler {
   /**
-   *
+   * This method should be overridden by a subclass.
    * @returns {{}}
    */
   readForm () {
@@ -8,13 +8,13 @@ export class FormHandler {
   }
 
   /**
-   *
+   * This method should be overridden by a subclass.
    * @param formData
    */
   create (formData) {}
 
   /**
-   *
+   * @constructor Represent a general form data handling.
    * @param form
    */
   constructor (form) {
@@ -22,7 +22,8 @@ export class FormHandler {
   }
 
   /**
-   *
+   * Accept a callback, which will be executed on form-data filled object
+   * creation. Add submit event listener on a form provided in the constructor.
    * @param callback
    */
   listen (callback) {
