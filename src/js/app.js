@@ -21,6 +21,8 @@ export class App {
     button.addEventListener('click', function () {
       userForm.getUserPromise().then(function (user) {
         console.log(user);
+      }).catch(function(error){
+        console.log(error);
       });
     });
 

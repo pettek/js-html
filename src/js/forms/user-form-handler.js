@@ -1,7 +1,6 @@
-import { User }        from '../user';
-import { FormHandler } from './form-handler';
-
-// import { FormValidator } from './form-validator';
+import { User }          from '../user';
+import { FormHandler }   from './form-handler';
+import { FormValidator } from './form-validator';
 
 export class UserFormHandler extends FormHandler {
 
@@ -37,24 +36,24 @@ export class UserFormHandler extends FormHandler {
    */
   create (formData) {
 
-    /*
-     // Validation step
-     const validator = new FormValidator(formData,
-     {
-     name: 'required|min:6|max:40',
-     telephone: 'required|number',
-     programmingLanguages: 'required',
-     },
-     );
-     const errorHandler = (errors) => (errors.map(error => console.log(error)));
 
-     if (validator.validate(errorHandler) === false) {
-     // Return null on validation failure
-     return null;
-     }
+    // Validation step
+    const validator = new FormValidator(formData,
+      {
+        name: 'required|min:6|max:30',
+        telephone: 'required|number',
+        programmingLanguages: 'required',
+      },
+    );
+    const errorHandler = (errors) => (errors.map(
+      error => console.log(' --- ' + error)));
 
-     // Will go here, if validation is successful
-     */
+    if (validator.validate(errorHandler) === false) {
+      // Return null on validation failure
+      return null;
+    }
+
+    // Will go here, if validation is successful
     const user = new User;
 
     user.name = formData.name;
@@ -74,13 +73,18 @@ export class UserFormHandler extends FormHandler {
    */
   getUserPromise () {
     const object = this;
-    return new Promise(function (resolve) {
+    return new Promise(function (resolve, reject) {
       // object.form.addEventListener('submit', function (event) {
       //   event.preventDefault();
-        resolve(object.create(
-          object.readForm(),
-        ));
-      });
+      const newUser = object.create(
+        object.readForm(),
+      );
+      if (newUser) {
+        resolve(newUser);
+      } else {
+        reject('Validation failed');
+      }
+    });
     // });
   }
 }
