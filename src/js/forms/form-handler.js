@@ -34,4 +34,8 @@ export class FormHandler {
     }.bind(this));
   }
 
+  get submitButton () {
+    return this.form.querySelector('button');
+  }
+
 }

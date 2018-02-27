@@ -17,7 +17,7 @@ export class App {
     const userForm = new UserFormHandler(
       this.root.querySelector('#user-submit-form'));
 
-    const button = this.root.querySelector('#submit-btn');
+    const button = userForm.submitButton;
     button.addEventListener('click', function () {
       userForm.getUserPromise().then(function (user) {
         console.log(user);
