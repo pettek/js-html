@@ -75,12 +75,12 @@ export class UserFormHandler extends FormHandler {
   getUserPromise () {
     const object = this;
     return new Promise(function (resolve) {
-      object.form.addEventListener('submit', function (event) {
-        event.preventDefault();
+      // object.form.addEventListener('submit', function (event) {
+      //   event.preventDefault();
         resolve(object.create(
           object.readForm(),
         ));
       });
-    });
+    // });
   }
 }
