@@ -18,9 +18,12 @@ export class Request {
       const req = new XMLHttpRequest();
 
       req.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
           const result = JSON.parse(this.response).results;
           resolve(result);
+        } else if (this.readyState === XMLHttpRequest.DONE &&
+          this.status !== 200) {
+          reject('Could not load data from API');
         }
       };
 

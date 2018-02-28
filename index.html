@@ -2,6 +2,7 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body style="padding-top: 2em;" id="root">
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
@@ -56,19 +57,18 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-4 col-4">
                     <button type="button" class="btn btn-primary btn-block request-btn">Get users</button>
                 </div>
-                <div class="col-md-2">
-                    <input class="form-control" type="number" name="users-number" value="1">
+                <div class="col-md-2 col-sm-4 col-4">
+                    <input class="form-control" type="number" name="users-number" value="1" min="1">
                 </div>
-                <div class="col-md-3 offset-md-4">
-                    <button type="button" class="btn btn-secondary btn-block request-btn">Clear users</button>
+                <div class="col-md-4 spinner hidden-sm-down"></div>
+                <div class="col-md-3 col-sm-4 col-4">
+                    <button type="button" class="btn btn-secondary btn-block clear-btn">Clear users</button>
                 </div>
             </div>
-            <div class="row mt-5">
-                <div class="col-12 api-results"></div>
-            </div>
+            <div class="row mt-5 api-results"></div>
         </div>
     </div>
     <hr>
