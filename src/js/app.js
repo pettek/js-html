@@ -1,6 +1,6 @@
-import { UserRequest }                           from './user-request';
-import { UserResultsHandler }                    from './results-handler';
-import { MALE_FILTER, FEMALE_FILTER, NO_FILTER } from './filters';
+import { UserRequest }        from './user-request';
+import { UserResultsHandler } from './results-handler';
+import { CustomFilter }       from './custom-filter';
 
 export class App {
   /**
@@ -9,6 +9,7 @@ export class App {
    */
   constructor (root) {
     this.root = root;
+    this.requestHandler = new UserRequest(this.root);
   }
 
   assignElements () {
@@ -17,7 +18,6 @@ export class App {
     this.userNumInput = this.root.querySelector('[name="users-number"]');
     this.resultsContainer = this.root.querySelector('.api-results');
     this.spinnerContainer = this.root.querySelector('.spinner');
-    this.filterInput = this.root.querySelectorAll('[name="filter"]');
   }
 
   /**
@@ -26,31 +26,31 @@ export class App {
    */
   run () {
     this.assignElements();
-    const requestHandler = new UserRequest(this.root);
-    const resultsHandler = new UserResultsHandler(this.resultsContainer,
+    this.resultsHandler = new UserResultsHandler(this.resultsContainer,
       this.spinnerContainer);
 
     this.callBtn.addEventListener('click', () => {
       // Start from the empty container
-      resultsHandler.clear();
-      resultsHandler.loaderOn();
+      this.resultsHandler.clear();
+      this.resultsHandler.loaderOn();
 
       // fetchUsers returns an array of promises
-      requestHandler.fetchUsers(this.userNumInput.value).then((users) => {
+      this.requestHandler.fetchUsers(this.userNumInput.value).then((users) => {
         // Display every user from the data
-        users.filter(this.filter).
-              forEach(user => resultsHandler.display(user.results));
+        users.filter(CustomFilter.chooseFilter(
+          this.root.querySelector('[name="filter"]:checked'))).
+              forEach(user => this.resultsHandler.display(user.results));
       }).catch((error) => {
         // Alert the error
         alert(error);
       }).finally(() => {
         // Turn off the loader either way
-        resultsHandler.loaderOff();
+        this.resultsHandler.loaderOff();
       });
     });
 
     this.clearBtn.addEventListener('click', () => {
-      resultsHandler.clear();
+      this.resultsHandler.clear();
     });
   }
 }
