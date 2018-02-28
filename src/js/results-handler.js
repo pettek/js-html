@@ -1,29 +1,35 @@
+const SPINNER = '<i class="fa fa-circle-o-notch fa-spin text-primary" ' +
+  'style="font-size: 1.5em; margin-top: 0.25em"></i>';
+const MALE_ICON = '<i class="fa fa-mars"></i>';
+const FEMALE_ICON = '<i class="fa fa-venus"></i>';
+const OTHER_ICON = '<i class="fa fa-genderless"></i>';
+
 export class UserResultsHandler {
 
+  /**
+   * @constructor Represents a Handler that renders the HTML to show what API returned
+   * @param resultsContainer
+   * @param spinner
+   */
   constructor (resultsContainer, spinner) {
     this.resultsContainer = resultsContainer;
     this.spinner = spinner;
   }
 
   /**
-   * Return a string where a first character is capitalized
-   * @static
+   * Return a font-awesome icon to represent gender graphically
    * @param string
    * @returns {string}
    */
-  static capitalize (string) {
-    return string[0].toUpperCase() + string.slice(1);
-  }
-
   static genderIcon (string) {
     let icon = '';
 
     if(string === 'male'){
-      icon = '<i class="fa fa-mars"></i>';
+      icon = MALE_ICON;
     } else if(string === 'female'){
-      icon = '<i class="fa fa-venus"></i>';
+      icon = FEMALE_ICON;
     } else {
-      icon = '<i class="fa fa-genderless"></i>';
+      icon = OTHER_ICON;
     }
 
     return icon;
@@ -34,9 +40,8 @@ export class UserResultsHandler {
   }
 
   loaderOn () {
-    this.spinner.innerHTML =
-      '<i class="fa fa-circle-o-notch fa-spin text-primary" ' +
-      'style="font-size: 1.5em; margin-top: 0.25em"></i>';
+    this.spinner.innerHTML = SPINNER;
+
   }
 
   loaderOff () {
@@ -44,31 +49,30 @@ export class UserResultsHandler {
   }
 
   display (data) {
-    const {name, email, phone, picture, gender} = data[0];
-    const {large} = picture;
-    const {title, first, last} = name;
+    const {
+      name: {title, first, last}, email, phone, picture: {large}, gender}
+      = data[0]; // data is array with one element
 
     // Create fullName from title, first and last
-    const fullName = UserResultsHandler.capitalize(title) + ' ' +
-      UserResultsHandler.capitalize(first) +
-      ' ' + UserResultsHandler.capitalize(last);
-
+    const fullName = `${title} ${first} ${last}`;
     const icon = UserResultsHandler.genderIcon(gender);
 
     const userDiv = document.createElement('div');
 
     userDiv.innerHTML =
       '<div class="row my-2">' +
-      '<div class="col-lg-2 col-md-3">' +
-      '<img src="' + large + '" alt="user-photo" class="rounded">' +
-      '</div>' +
-      '<div class="col-lg-10 col-md-9">' +
-      '<h2 class="mt-4">' + icon + ' ' + fullName + '</h2>' +
-      '<p>' + email + ' | ' + phone + '</p>' +
-      '</div>' +
+        '<div class="col-lg-2 col-md-3">' +
+          '<img src="' + large + '" alt="user-photo" class="rounded">' +
+        '</div>' +
+        '<div class="col-lg-10 col-md-9">' +
+          '<h2 class="mt-4 text-capitalize">' + icon + ' ' + fullName + '</h2>'+
+          '<p class="text-muted">' + email + ' | ' + phone + '</p>' +
+        '</div>' +
       '</div>';
 
     userDiv.classList.add('col-md-12');
+
+    // Append created div into the container
     this.resultsContainer.appendChild(userDiv);
   }
 }
