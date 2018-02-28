@@ -57,14 +57,19 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-3 col-sm-4 col-4">
+                <div class="col-md-3 col-sm-3 col-3">
                     <button type="button" class="btn btn-primary btn-block request-btn">Get users</button>
                 </div>
-                <div class="col-md-2 col-sm-4 col-4">
+                <div class="col-md-1 col-sm-3 col-3">
                     <input class="form-control" type="number" name="users-number" value="1" min="1">
                 </div>
-                <div class="col-md-4 spinner hidden-sm-down"></div>
-                <div class="col-md-3 col-sm-4 col-4">
+                <div class="col-md-1 spinner hidden-sm-down"></div>
+                <div class="col-md-4 col-sm-3 col-3">
+                    <label><input type="radio" name="filter" value="male"> Show males</label><br>
+                    <label><input type="radio" name="filter" value="female"> Show females</label><br>
+                    <label><input type="radio" name="filter" value="no-filter"> No filter</label><br>
+                </div>
+                <div class="col-md-3 col-sm-3 col-3">
                     <button type="button" class="btn btn-secondary btn-block clear-btn">Clear users</button>
                 </div>
             </div>
