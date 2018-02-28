@@ -1,5 +1,6 @@
-import { UserRequest }        from './user-request';
-import { UserResultsHandler } from './results-handler';
+import { UserRequest }                           from './user-request';
+import { UserResultsHandler }                    from './results-handler';
+import { MALE_FILTER, FEMALE_FILTER, NO_FILTER } from './filters';
 
 export class App {
   /**
@@ -10,31 +11,46 @@ export class App {
     this.root = root;
   }
 
-  run () {
-    const callButton = this.root.querySelector('.request-btn');
-    const clearButton = this.root.querySelector('.clear-btn');
-    const howManyUsersInput = this.root.querySelector('[name="users-number"]');
-    const requestHandler = new UserRequest(this.root);
-    const results = new UserResultsHandler(
-      this.root.querySelector('.api-results'),
-      this.root.querySelector('.spinner'));
+  assignElements () {
+    this.callBtn = this.root.querySelector('.request-btn');
+    this.clearBtn = this.root.querySelector('.clear-btn');
+    this.userNumInput = this.root.querySelector('[name="users-number"]');
+    this.resultsContainer = this.root.querySelector('.api-results');
+    this.spinnerContainer = this.root.querySelector('.spinner');
+    this.filterInput = this.root.querySelectorAll('[name="filter"]');
+  }
 
-    callButton.addEventListener('click', () => {
+  /**
+   * Create all dependencies and events that will enable for this app to run
+   * requests to a specific API
+   */
+  run () {
+    this.assignElements();
+    const requestHandler = new UserRequest(this.root);
+    const resultsHandler = new UserResultsHandler(this.resultsContainer,
+      this.spinnerContainer);
+
+    this.callBtn.addEventListener('click', () => {
       // Start from the empty container
-      results.clear();
-      results.loaderOn();
+      resultsHandler.clear();
+      resultsHandler.loaderOn();
 
       // fetchUsers returns an array of promises
-      requestHandler.fetchUsers(howManyUsersInput.value).then((users) => {
-        users.forEach(user => results.display(user));
-        results.loaderOff();
+      requestHandler.fetchUsers(this.userNumInput.value).then((users) => {
+        // Display every user from the data
+        users.filter(this.filter).
+              forEach(user => resultsHandler.display(user.results));
       }).catch((error) => {
+        // Alert the error
         alert(error);
+      }).finally(() => {
+        // Turn off the loader either way
+        resultsHandler.loaderOff();
       });
     });
 
-    clearButton.addEventListener('click', () => {
-      results.clear();
+    this.clearBtn.addEventListener('click', () => {
+      resultsHandler.clear();
     });
   }
 }
