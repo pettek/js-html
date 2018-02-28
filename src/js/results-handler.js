@@ -35,19 +35,33 @@ export class UserResultsHandler {
     return icon;
   }
 
+  /**
+   * Clear container before displaying anything, so we avoid appending new users
+   * indefinitely
+   */
   clear () {
     this.resultsContainer.innerHTML = '';
   }
 
+  /**
+   * Show loader
+   */
   loaderOn () {
     this.spinner.innerHTML = SPINNER;
 
   }
 
+  /**
+   * Hide loader
+   */
   loaderOff () {
     this.spinner.innerHTML = '';
   }
 
+  /**
+   * Parse User data to render HTML element to plug into the container
+   * @param data
+   */
   display (data) {
     const {
       name: {title, first, last}, email, phone, picture: {large}, gender}
