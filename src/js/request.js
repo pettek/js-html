@@ -1,6 +1,8 @@
+const HttpOKStatus = 200;
+
 export class Request {
   /**
-   * @constructor
+   * @constructor Represent a generic Request
    * @param baseUrl
    */
   constructor (baseUrl) {
@@ -14,20 +16,23 @@ export class Request {
    */
   get (relativePath) {
     const completePath = this.baseUrl + relativePath;
+
     return new Promise((resolve, reject) => {
       const req = new XMLHttpRequest();
 
       req.onreadystatechange = function () {
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-          const result = JSON.parse(this.response).results;
+
+        if (this.readyState === XMLHttpRequest.DONE &&
+          this.status === HttpOKStatus) {
+          const result = JSON.parse(this.response);
           resolve(result);
         } else if (this.readyState === XMLHttpRequest.DONE &&
-          this.status !== 200) {
+          this.status !== HttpOKStatus) {
           reject('Could not load data from API');
         }
       };
 
-      req.open('GET', completePath);
+      req.open('GET', completePath, true);
       req.send();
     });
   }
