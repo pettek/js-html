@@ -41,6 +41,7 @@ export class UserResultsHandler {
    */
   clear () {
     this.resultsContainer.innerHTML = '';
+    return this;
   }
 
   /**
@@ -48,7 +49,7 @@ export class UserResultsHandler {
    */
   loaderOn () {
     this.spinner.innerHTML = SPINNER;
-
+    return this;
   }
 
   /**
@@ -56,6 +57,7 @@ export class UserResultsHandler {
    */
   loaderOff () {
     this.spinner.innerHTML = '';
+    return this;
   }
 
   /**
