@@ -4,7 +4,7 @@ import { CustomFilter }       from './filter/custom-filter';
 import { FILTER_SETTINGS }    from './filter/filter-settings';
 
 // Specify API url and endpoints
-const API = 'https://randomuser.me';
+const API = 'https://randomuser.me/';
 const GET_ENDPOINT = '/api';
 
 export class App {
