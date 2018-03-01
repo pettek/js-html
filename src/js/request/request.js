@@ -6,7 +6,7 @@ export class Request {
    * @param baseUrl
    */
   constructor (baseUrl = '') {
-    this.baseUrl = baseUrl || '';
+    this.baseUrl = baseUrl;
   }
 
   /**
