@@ -1,6 +1,9 @@
-import { UserRequest }        from './user-request';
+import { RequestData }        from './request-data';
 import { UserResultsHandler } from './results-handler';
 import { CustomFilter }       from './custom-filter';
+
+const API = 'https://randomuser.me';
+const GET_ENDPOINT = '/api';
 
 export class App {
   /**
@@ -9,7 +12,7 @@ export class App {
    */
   constructor (root) {
     this.root = root;
-    this.requestHandler = new UserRequest(this.root);
+    this.requestHandler = new RequestData(API);
   }
 
   assignElements () {
@@ -35,7 +38,8 @@ export class App {
       this.resultsHandler.loaderOn();
 
       // fetchUsers returns an array of promises
-      this.requestHandler.fetchUsers(this.userNumInput.value).then((users) => {
+      this.requestHandler.makeMultipleCalls(GET_ENDPOINT,
+        this.userNumInput.value).then((users) => {
         // Display every user from the data
         users.filter(CustomFilter.chooseFilter(
           this.root.querySelector('[name="filter"]:checked'))).
