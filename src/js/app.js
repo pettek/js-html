@@ -1,6 +1,7 @@
 import { RequestData }        from './request-data';
 import { UserResultsHandler } from './user-results-handler';
 import { CustomFilter }       from './custom-filter';
+import { FILTER_SETTINGS }    from './filter-settings';
 
 // Specify API url and endpoints
 const API = 'https://randomuser.me';
@@ -14,6 +15,7 @@ export class App {
   constructor (root) {
     this.root = root;
     this.requestHandler = new RequestData(API);
+    this.filter = new CustomFilter(FILTER_SETTINGS);
   }
 
   /**
@@ -43,16 +45,15 @@ export class App {
       this.resultsHandler.clear().loaderOn();
 
       // makeMultipleCalls returns a single promise composed of array of them
-      this.requestHandler
-        .makeMultipleCalls(GET_ENDPOINT, this.userNumInput.value)
-        .then((users) => {
+      this.requestHandler.makeMultipleCalls(GET_ENDPOINT,
+        this.userNumInput.value).then((users) => {
 
         // Filter the results accordingly
-        users.filter(CustomFilter
-          .chooseFilter(this.root.querySelector('[name="filter"]:checked')))
+        users.filter(this.filter.chooseFilter(
+          this.root.querySelector('[name="filter"]:checked').value))
 
-        // Show every result that passed through the filter
-        .forEach(user => this.resultsHandler.display(user));
+              // Show every result that passed through the filter
+              .forEach(user => this.resultsHandler.display(user));
 
       }).catch((error) => {
 
