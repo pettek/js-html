@@ -33,7 +33,7 @@ export class UserResultsHandler extends ResultsHandler {
     const {
       name: {title, first, last}, email, phone, picture: {large}, gender,
     }
-      = data[0]; // data is array with one element
+      = data.results[0]; // specify where significant data can be found
 
     // Create fullName from title, first and last
     const fullName = `${title} ${first} ${last}`;

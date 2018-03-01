@@ -52,7 +52,7 @@ export class App {
           .chooseFilter(this.root.querySelector('[name="filter"]:checked')))
 
         // Show every result that passed through the filter
-        .forEach(user => this.resultsHandler.display(user.results));
+        .forEach(user => this.resultsHandler.display(user));
 
       }).catch((error) => {
 
