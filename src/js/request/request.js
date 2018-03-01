@@ -23,10 +23,6 @@ export class Request {
    */
   static createPath (baseUrl, relPath) {
 
-    if(baseUrl === '' && relPath === '') {
-      return null;
-    }
-
     baseUrl = baseUrl.replace(/\s/g, '').replace(/^\/|\/$/g, '');
     relPath = relPath.replace(/\s/g, '').replace(/^\/|\/$/g, '');
 
@@ -45,7 +41,7 @@ export class Request {
 
     return new Promise((resolve, reject) => {
 
-      if(completePath === null) {
+      if(completePath === '') {
         reject('Please provide some path to API');
       }
 
