@@ -1,7 +1,7 @@
-import { RequestData }        from './request-data';
-import { UserResultsHandler } from './user-results-handler';
-import { CustomFilter }       from './custom-filter';
-import { FILTER_SETTINGS }    from './filter-settings';
+import { RequestData }        from './request/request-data';
+import { UserResultsHandler } from './results-handler/user-results-handler';
+import { CustomFilter }       from './filter/custom-filter';
+import { FILTER_SETTINGS }    from './filter/filter-settings';
 
 // Specify API url and endpoints
 const API = 'https://randomuser.me';
