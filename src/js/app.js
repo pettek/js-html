@@ -1,5 +1,5 @@
 import { RequestData }        from './request-data';
-import { UserResultsHandler } from './results-handler';
+import { UserResultsHandler } from './user-results-handler';
 import { CustomFilter }       from './custom-filter';
 
 // Specify API url and endpoints
