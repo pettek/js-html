@@ -4,16 +4,7 @@ const MALE_ICON = '<i class="fa fa-mars"></i>';
 const FEMALE_ICON = '<i class="fa fa-venus"></i>';
 const OTHER_ICON = '<i class="fa fa-genderless"></i>';
 
-export class UserResultsHandler extends ResultsHandler{
-
-  /**
-   * @constructor Represents a Handler that renders the HTML to show what API returned
-   * @param resultsContainer
-   * @param spinner
-   */
-  constructor (resultsContainer, spinner) {
-    super(resultsContainer, spinner);
-  }
+export class UserResultsHandler extends ResultsHandler {
 
   /**
    * Return a font-awesome icon to represent gender graphically
@@ -23,9 +14,9 @@ export class UserResultsHandler extends ResultsHandler{
   static genderIcon (string) {
     let icon = '';
 
-    if(string === 'male'){
+    if (string === 'male') {
       icon = MALE_ICON;
-    } else if(string === 'female'){
+    } else if (string === 'female') {
       icon = FEMALE_ICON;
     } else {
       icon = OTHER_ICON;
@@ -34,14 +25,14 @@ export class UserResultsHandler extends ResultsHandler{
     return icon;
   }
 
-
   /**
    * Parse User data to render HTML element to plug into the container
    * @param data
    */
   display (data) {
     const {
-      name: {title, first, last}, email, phone, picture: {large}, gender}
+      name: {title, first, last}, email, phone, picture: {large}, gender,
+    }
       = data[0]; // data is array with one element
 
     // Create fullName from title, first and last

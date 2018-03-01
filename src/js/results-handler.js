@@ -2,6 +2,12 @@ const SPINNER = '<i class="fa fa-circle-o-notch fa-spin text-primary" ' +
   'style="font-size: 1.5em; margin-top: 0.25em"></i>';
 
 export class ResultsHandler{
+
+  /**
+   * @constructor Represents a Handler that renders the HTML to show what API returned
+   * @param resultsContainer
+   * @param spinner
+   */
   constructor (resultsContainer, spinner) {
     this.resultsContainer = resultsContainer;
     this.spinner = spinner;
