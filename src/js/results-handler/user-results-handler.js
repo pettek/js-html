@@ -42,7 +42,7 @@ export class UserResultsHandler extends ResultsHandler {
     const userDiv = document.createElement('div');
 
     userDiv.innerHTML =
-      '<div class="row my-2">' +
+      '<div class="row my-2 user-row">' +
         '<div class="col-lg-2 col-md-3">' +
           '<img src="' + large + '" alt="user-photo" class="rounded">' +
         '</div>' +
