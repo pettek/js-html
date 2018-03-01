@@ -2,11 +2,16 @@ const HttpOKStatus = 200;
 
 export class Request {
   /**
+   * Request times out (rejects the Promise) after specified number of
+   * miliseconds
+   *
    * @constructor Represent a generic Request
    * @param baseUrl
+   * @param timeout
    */
-  constructor (baseUrl = '') {
+  constructor (baseUrl = '', timeout = 5000) {
     this.baseUrl = baseUrl;
+    this.timeout = timeout;
   }
 
   /**
@@ -16,6 +21,7 @@ export class Request {
    *  2) if there are forward slashes in the beginning of in the end of either
    *    base or relative path -> delete them, the necessary forward slash will
    *    be concatenated (the second of the chained replace methods)
+   *
    * @static
    * @param baseUrl
    * @param relPath
@@ -38,12 +44,17 @@ export class Request {
    */
   get (relativePath = '') {
     const completePath = Request.createPath(this.baseUrl, relativePath);
+    const timeout = this.timeout;
 
     return new Promise((resolve, reject) => {
 
       if(completePath === '') {
         reject('Please provide some path to API');
       }
+
+      setTimeout(() => {
+        reject("Aborted. Call to API took too long.");
+      }, timeout);
 
       const req = new XMLHttpRequest();
 

@@ -59,7 +59,7 @@ export class App {
       }).catch((error) => {
 
         // Alert the error, if any caught
-        alert(error);
+        console.log(error);
 
       }).finally(() => {
 
