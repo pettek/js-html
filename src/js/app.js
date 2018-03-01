@@ -1,11 +1,10 @@
-import { RequestData }        from './request/request-data';
-import { UserResultsHandler } from './results-handler/user-results-handler';
-import { CustomFilter }       from './filter/custom-filter';
-import { FILTER_SETTINGS }    from './filter/filter-settings';
+import { RequestData }                   from './request/request-data';
+import { UserResultsHandler }            from './results-handler/user-results-handler';
+import { CustomFilter, FILTER_SETTINGS } from './filter';
 
 // Specify API url and endpoints
-const API = 'https://randomuser.me/';
-const GET_ENDPOINT = '/api';
+const API = 'https://randomuser.me';
+const GET_ENDPOINT = 'api';
 
 export class App {
   /**

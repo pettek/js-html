@@ -5,8 +5,8 @@ export class Request {
    * @constructor Represent a generic Request
    * @param baseUrl
    */
-  constructor (baseUrl) {
-    this.baseUrl = baseUrl;
+  constructor (baseUrl = '') {
+    this.baseUrl = baseUrl || '';
   }
 
   /**
@@ -36,7 +36,7 @@ export class Request {
    * @param relativePath
    * @returns {Promise<any>}
    */
-  get (relativePath) {
+  get (relativePath = '') {
     const completePath = Request.createPath(this.baseUrl, relativePath);
 
     return new Promise((resolve, reject) => {
