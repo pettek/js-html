@@ -2,6 +2,7 @@ import { RequestData }        from './request-data';
 import { UserResultsHandler } from './results-handler';
 import { CustomFilter }       from './custom-filter';
 
+// Specify API url and endpoints
 const API = 'https://randomuser.me';
 const GET_ENDPOINT = '/api';
 
@@ -15,6 +16,9 @@ export class App {
     this.requestHandler = new RequestData(API);
   }
 
+  /**
+   * Keeps all the DOM assignments in one place
+   */
   assignElements () {
     this.callBtn = this.root.querySelector('.request-btn');
     this.clearBtn = this.root.querySelector('.clear-btn');
@@ -29,30 +33,41 @@ export class App {
    */
   run () {
     this.assignElements();
-    this.resultsHandler = new UserResultsHandler(this.resultsContainer,
-      this.spinnerContainer);
+    this.resultsHandler =
+      new UserResultsHandler(this.resultsContainer, this.spinnerContainer);
 
+    // Bind click to making multiple requests to API and rendering results
     this.callBtn.addEventListener('click', () => {
-      // Start from the empty container
-      this.resultsHandler.clear();
-      this.resultsHandler.loaderOn();
 
-      // fetchUsers returns an array of promises
-      this.requestHandler.makeMultipleCalls(GET_ENDPOINT,
-        this.userNumInput.value).then((users) => {
-        // Display every user from the data
-        users.filter(CustomFilter.chooseFilter(
-          this.root.querySelector('[name="filter"]:checked'))).
-              forEach(user => this.resultsHandler.display(user.results));
+      // Start from the empty container and show the loader
+      this.resultsHandler.clear().loaderOn();
+
+      // makeMultipleCalls returns a single promise composed of array of them
+      this.requestHandler
+        .makeMultipleCalls(GET_ENDPOINT, this.userNumInput.value)
+        .then((users) => {
+
+        // Filter the results accordingly
+        users.filter(CustomFilter
+          .chooseFilter(this.root.querySelector('[name="filter"]:checked')))
+
+        // Show every result that passed through the filter
+        .forEach(user => this.resultsHandler.display(user.results));
+
       }).catch((error) => {
-        // Alert the error
+
+        // Alert the error, if any caught
         alert(error);
+
       }).finally(() => {
+
         // Turn off the loader either way
         this.resultsHandler.loaderOff();
+
       });
     });
 
+    // Clear the container if button responsible of clearing is pressed
     this.clearBtn.addEventListener('click', () => {
       this.resultsHandler.clear();
     });
