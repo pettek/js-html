@@ -1,7 +1,6 @@
 import { Request } from './request';
 
 export class RequestData {
-
   /**
    * @constructor Represent the request to the API
    * @param baseUrl

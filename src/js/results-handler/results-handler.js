@@ -1,8 +1,7 @@
 const SPINNER = '<i class="fa fa-circle-o-notch fa-spin text-primary" ' +
   'style="font-size: 1.5em; margin-top: 0.25em"></i>';
 
-export class ResultsHandler{
-
+export class ResultsHandler {
   /**
    * @constructor Represents a Handler that renders the HTML to show what API returned
    * @param resultsContainer
@@ -19,6 +18,7 @@ export class ResultsHandler{
    */
   clear () {
     this.resultsContainer.innerHTML = '';
+
     return this;
   }
 
@@ -27,6 +27,7 @@ export class ResultsHandler{
    */
   loaderOn () {
     this.spinner.innerHTML = SPINNER;
+
     return this;
   }
 
@@ -35,6 +36,7 @@ export class ResultsHandler{
    */
   loaderOff () {
     this.spinner.innerHTML = '';
+
     return this;
   }
 
@@ -43,7 +45,7 @@ export class ResultsHandler{
    * This method needs to be overridden if dealing the different types of data.
    * @param data
    */
-  display(data) {
+  display (data) {
     this.resultsContainer.innerHTML = data;
   }
 }
