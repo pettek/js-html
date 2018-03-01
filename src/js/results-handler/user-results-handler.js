@@ -5,7 +5,6 @@ const FEMALE_ICON = '<i class="fa fa-venus"></i>';
 const OTHER_ICON = '<i class="fa fa-genderless"></i>';
 
 export class UserResultsHandler extends ResultsHandler {
-
   /**
    * Return a font-awesome icon to represent gender graphically
    * @param string

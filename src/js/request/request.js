@@ -40,7 +40,7 @@ export class Request {
   /**
    * Returns a Promise for an HTTP get request to a specific path
    * @param relativePath
-   * @returns {Promise<any>}
+   * @returns {Promise<*>}
    */
   get (relativePath = '') {
     const completePath = Request.createPath(this.baseUrl, relativePath);
@@ -48,7 +48,7 @@ export class Request {
 
     return new Promise((resolve, reject) => {
 
-      if(completePath === '') {
+      if (completePath === '') {
         reject('Please provide some path to API');
       }
 
@@ -63,6 +63,7 @@ export class Request {
         if (this.readyState === XMLHttpRequest.DONE &&
           this.status === HttpOKStatus) {
           const result = JSON.parse(this.response);
+
           resolve(result);
         } else if (this.readyState === XMLHttpRequest.DONE &&
           this.status !== HttpOKStatus) {
