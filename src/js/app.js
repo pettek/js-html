@@ -4,7 +4,7 @@ import { CustomFilter, FILTER_SETTINGS } from './filter';
 
 // Specify API url and endpoints
 const API = 'https://randomuser.me';
-const GET_ENDPOINT = 'api';
+const ENDPOINT = 'api';
 
 export class App {
   /**
@@ -40,19 +40,21 @@ export class App {
     // Bind click to making multiple requests to API and rendering results
     this.callBtn.addEventListener('click', () => {
 
+      // Create a filter for gender based on radio buttons value
+      const genderFilter = this.filter.chooseFilter(
+        this.root.querySelector('[name="filter"]:checked').value);
+
       // Start from the empty container and show the loader
       this.resultsHandler.clear().loaderOn();
 
       // makeMultipleCalls returns a single promise composed of array of them
-      this.requestHandler.makeMultipleCalls(GET_ENDPOINT,
-        this.userNumInput.value).then((users) => {
+      this.requestHandler.makeMultipleCalls(ENDPOINT, this.userNumInput.value)
+        .then((users) => {
+          // Filter the results accordingly
+          users.filter(genderFilter).forEach(
 
-        // Filter the results accordingly
-        users.filter(this.filter.chooseFilter(
-          this.root.querySelector('[name="filter"]:checked').value))
-
-              // Show every result that passed through the filter
-              .forEach(user => this.resultsHandler.display(user));
+            // Show every result that passed through the filter
+            user => this.resultsHandler.display(user));
 
       }).catch((error) => {
 
