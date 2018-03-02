@@ -26,6 +26,9 @@ export class User {
     this._password = null;
 
     /** @type {String} */
+    this._salt = null;
+
+    /** @type {String} */
     this._gender = null;
 
     /** @type {Date} */
@@ -84,6 +87,14 @@ export class User {
 
   set password (value) {
     this._password = value;
+  }
+
+  get salt () {
+    return this._salt;
+  }
+
+  set salt (value) {
+    this._salt = value;
   }
 
   get gender () {

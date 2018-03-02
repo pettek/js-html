@@ -102,6 +102,19 @@ export class UserBuilder {
   }
 
   /**
+   * Assign salt to the user being created
+   * @param {String} salt
+   * @returns {UserBuilder}
+   */
+  setSalt (salt) {
+    this._user.salt = salt;
+
+    return this;
+  }
+
+
+
+  /**
    * Assign (push to the array) new phoneNumber to the user being created
    * @param {String} phoneNumber
    * @returns {UserBuilder}
