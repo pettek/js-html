@@ -34,7 +34,9 @@ export class App {
    * requests to a specific API
    */
   run () {
-    const user = new APIUserDirector(new UserBuilder(), this.requestHandler);
+    const user = new APIUserDirector(new UserBuilder(), this.requestHandler)
+      .buildUsersArray();
+
     console.log(user);
 
     this.assignElements();
