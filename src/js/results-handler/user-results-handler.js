@@ -30,12 +30,18 @@ export class UserResultsHandler extends ResultsHandler {
    */
   display (data) {
     const {
-      name: {title, first, last}, email, phone, picture: {large}, gender,
-    }
-      = data.results[0]; // specify where significant data can be found
+      firstName: first,
+      lastName: last,
+      email,
+      avatar: large,
+      gender,
+    } = data;
+
+    // Can't access phone via destructuring
+    const phone = data.phoneNumbers[1].number;
 
     // Create fullName from title, first and last
-    const fullName = `${title} ${first} ${last}`;
+    const fullName = `${first} ${last}`;
     const icon = UserResultsHandler.genderIcon(gender);
 
     const userDiv = document.createElement('div');

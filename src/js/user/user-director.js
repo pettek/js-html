@@ -13,36 +13,42 @@ export class APIUserDirector {
 
   /**
    * Builds the user using builder and provided data
-   * @returns {User[]}
+   * @returns {Promise<[*]>}
    */
 
-  buildUsersArray () {
+  getUsersArray (howMany) {
     const usersArray = [];
 
-    this.requestManager.makeMultipleCalls('/api', 2).then(userDataArray => {
-      userDataArray.forEach(userData => {
-        const user = this.builder.create();
-        const object = APIUserDirector.parseAPIResponse(userData);
+    return new Promise((resolve, reject) => {
+      this.requestManager.makeMultipleCalls('/api', howMany).
+           then(userDataArray => {
+             userDataArray.forEach(userData => {
+               const user = this.builder.create();
+               const object = APIUserDirector.parseAPIResponse(userData);
 
-        user.setFirstName(object.name.first)
-             .setLastName(object.name.last)
-             .setGender(object.gender)
-             .setUserName(object.login.username)
-             .setPassword(object.login.sha256)
-             .setSalt(object.login.salt)
-             .setAddress(object.location.city,
-                         object.location.postcode,
-                         object.location.street)
-             .setEmail(object.email)
-             .setPhoneNumber('cell', object.cell)
-             .setPhoneNumber('phone', object.phone)
-             .setAvatar(object.picture.large)
-             .setRegistrationDate(Date(object.registered));
+               user.setFirstName(object.name.first).
+                    setLastName(object.name.last).
+                    setGender(object.gender).
+                    setUserName(object.login.username).
+                    setPassword(object.login.sha256).
+                    setSalt(object.login.salt).
+                    setAddress(object.location.city,
+                      object.location.postcode,
+                      object.location.street).
+                    setEmail(object.email).
+                    setPhoneNumber('cell', object.cell).
+                    setPhoneNumber('phone', object.phone).
+                    setAvatar(object.picture.large).
+                    setRegistrationDate(Date(object.registered));
 
-        usersArray.push(user.build());
-      });
+               const finalUser = user.build();
+
+               usersArray.push(finalUser);
+             });
+             resolve(usersArray);
+           }).catch((error => {
+             reject(error);
+      }));
     });
-
-    return usersArray;
   }
 }

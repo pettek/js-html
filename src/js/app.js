@@ -1,7 +1,7 @@
 import { RequestData }                   from './request/request-data';
 import { UserResultsHandler }            from './results-handler/user-results-handler';
 import { CustomFilter, FILTER_SETTINGS } from './filter';
-import { UserBuilder, APIUserDirector }     from './user';
+import { UserBuilder, APIUserDirector }  from './user';
 
 // Specify API url and endpoints
 const API = 'https://randomuser.me';
@@ -16,6 +16,8 @@ export class App {
     this.root = root;
     this.requestHandler = new RequestData(API);
     this.filter = new CustomFilter(FILTER_SETTINGS);
+    this.usersAPIHandler = new APIUserDirector(new UserBuilder(),
+      this.requestHandler);
   }
 
   /**
@@ -34,11 +36,6 @@ export class App {
    * requests to a specific API
    */
   run () {
-    const user = new APIUserDirector(new UserBuilder(), this.requestHandler)
-      .buildUsersArray();
-
-    console.log(user);
-
     this.assignElements();
     this.resultsHandler =
       new UserResultsHandler(this.resultsContainer, this.spinnerContainer);
@@ -51,29 +48,19 @@ export class App {
         this.root.querySelector('[name="filter"]:checked').value);
 
       // Start from the empty container and show the loader
-      this.resultsHandler.clear().loaderOn();
+      this.resultsHandler.clear();
 
-      // makeMultipleCalls returns a single promise composed of array of them
-      this.requestHandler.makeMultipleCalls(ENDPOINT, this.userNumInput.value).
-           then((users) => {
-             // Filter the results accordingly
-             users.filter(genderFilter).forEach(
-               // Show every result that passed through the filter
-               user => this.resultsHandler.display(user));
+      this.usersAPIHandler.getUsersArray(this.userNumInput.value)
+           .then(users => {
+             users.forEach(user => {
+               // Console log every user
+               console.log(user);
 
-           }).
-           catch((error) => {
-
-             // Alert the error, if any caught
-             console.log(error);
-
-           }).
-           finally(() => {
-
-             // Turn off the loader either way
-             this.resultsHandler.loaderOff();
-
-           });
+               // Show in the results' container
+               this.resultsHandler.display(user);
+             });
+           })
+           .catch((error) => console.log(error));
     });
 
     // Clear the container if button responsible of clearing is pressed
