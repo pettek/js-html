@@ -14,7 +14,7 @@ export class App {
    */
   constructor (root) {
     this.root = root;
-    this.requestHandler = new RequestData(API);
+    this.requestHandler = new Request(API);
     this.filter = new CustomFilter(FILTER_SETTINGS);
     this.usersAPIHandler = new APIUserDirector(new UserBuilder(),
       this.requestHandler);
@@ -50,17 +50,11 @@ export class App {
       // Start from the empty container and show the loader
       this.resultsHandler.clear();
 
-      this.usersAPIHandler.getUsersArray(this.userNumInput.value)
-           .then(users => {
-             users.forEach(user => {
-               // Console log every user
-               console.log(user);
-
-               // Show in the results' container
-               this.resultsHandler.display(user);
-             });
-           })
-           .catch((error) => console.log(error));
+      this.usersAPIHandler.getUser(ENDPOINT).then(user => {
+        console.log(user);
+        this.resultsHandler.display(user);
+      })
+      .catch((error) => console.log(error));
     });
 
     // Clear the container if button responsible of clearing is pressed

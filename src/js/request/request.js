@@ -53,7 +53,7 @@ export class Request {
       }
 
       setTimeout(() => {
-        reject("Aborted. Call to API took too long.");
+        reject('Aborted. Call to API took too long.');
       }, timeout);
 
       const req = new XMLHttpRequest();
