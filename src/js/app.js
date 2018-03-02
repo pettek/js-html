@@ -1,6 +1,7 @@
 import { RequestData }                   from './request/request-data';
 import { UserResultsHandler }            from './results-handler/user-results-handler';
 import { CustomFilter, FILTER_SETTINGS } from './filter';
+import { UserBuilder, APIUserDirector }     from './user';
 
 // Specify API url and endpoints
 const API = 'https://randomuser.me';
@@ -33,6 +34,9 @@ export class App {
    * requests to a specific API
    */
   run () {
+    const user = new APIUserDirector(new UserBuilder(), this.requestHandler);
+    console.log(user);
+
     this.assignElements();
     this.resultsHandler =
       new UserResultsHandler(this.resultsContainer, this.spinnerContainer);
@@ -48,25 +52,26 @@ export class App {
       this.resultsHandler.clear().loaderOn();
 
       // makeMultipleCalls returns a single promise composed of array of them
-      this.requestHandler.makeMultipleCalls(ENDPOINT, this.userNumInput.value)
-        .then((users) => {
-          // Filter the results accordingly
-          users.filter(genderFilter).forEach(
+      this.requestHandler.makeMultipleCalls(ENDPOINT, this.userNumInput.value).
+           then((users) => {
+             // Filter the results accordingly
+             users.filter(genderFilter).forEach(
+               // Show every result that passed through the filter
+               user => this.resultsHandler.display(user));
 
-            // Show every result that passed through the filter
-            user => this.resultsHandler.display(user));
+           }).
+           catch((error) => {
 
-      }).catch((error) => {
+             // Alert the error, if any caught
+             console.log(error);
 
-        // Alert the error, if any caught
-        console.log(error);
+           }).
+           finally(() => {
 
-      }).finally(() => {
+             // Turn off the loader either way
+             this.resultsHandler.loaderOff();
 
-        // Turn off the loader either way
-        this.resultsHandler.loaderOff();
-
-      });
+           });
     });
 
     // Clear the container if button responsible of clearing is pressed

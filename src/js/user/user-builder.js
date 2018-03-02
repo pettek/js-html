@@ -1,3 +1,5 @@
+import { User, Address, PhoneNumber } from '.';
+
 /**
  * Provides methods to build the User object
  */
@@ -104,7 +106,13 @@ export class UserBuilder {
    * @param {String} phoneNumber
    * @returns {UserBuilder}
    */
-  setPhoneNumber (phoneNumber) {
+  setPhoneNumber (type, number) {
+
+    const phoneNumber = new PhoneNumber();
+
+    phoneNumber.type = type;
+    phoneNumber.number = number;
+
     this._user.phoneNumbers.push(phoneNumber);
 
     return this;

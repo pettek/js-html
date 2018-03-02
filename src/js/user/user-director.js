@@ -1,9 +1,10 @@
 /**
  * Supervises the process of building the User
  */
-export class UserDirector {
-  constructor (builder) {
+export class APIUserDirector {
+  constructor (builder, requestManager) {
     this.builder = builder;
+    this.requestManager = requestManager;
   }
 
   /**
@@ -11,12 +12,7 @@ export class UserDirector {
    * @param data
    * @returns {User}
    */
-  buildUser(data){
-    return this.builder
-      .create()
-      .setFirstName('Imię')
-      .setLastName('Nazwisko')
-      .setAddress('Miasto', '12-345', 'Adresowa 1/1')
-      .build();
+  buildUser(){
+    return this.builder.create()
   }
 }
