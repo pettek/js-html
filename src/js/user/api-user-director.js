@@ -85,7 +85,7 @@ export class APIUserDirector {
     if (!object.registered) {
       object.registered = '';
 
-      console.error('Invalid registation date data from API');
+      console.error('Invalid registration date data from API');
     }
 
     if (!object.picture || !object.picture.large) {
