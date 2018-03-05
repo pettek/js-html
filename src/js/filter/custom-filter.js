@@ -12,7 +12,7 @@ export class CustomFilter {
   constructor (settings) {
     this.settings = settings;
     if (!this.settings.default) {
-      this.settings.default = (data) => true;
+      this.settings.default = () => true;
     }
   }
 

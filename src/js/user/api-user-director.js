@@ -119,8 +119,7 @@ export class APIUserDirector {
 
         // Get data as a parsed object from the API and validate it
         const object = APIUserDirector.validateJSONObject(
-          APIUserDirector.getDataFromResponse(userData),
-        );
+          APIUserDirector.getDataFromResponse(userData));
 
         // Start with the empty User
         const user = this.builder.create();
