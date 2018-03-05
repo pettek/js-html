@@ -105,7 +105,7 @@ export class APIUserDirector {
    * @param data
    * @returns {*}
    */
-  static parseAPIResponse (data) {
+  static getDataFromResponse (data) {
     return data.results[0];
   }
 
@@ -120,7 +120,7 @@ export class APIUserDirector {
 
         // Get data as a parsed object from the API and validate it
         const object = APIUserDirector.validateJSONObject(
-          APIUserDirector.parseAPIResponse(userData)
+          APIUserDirector.getDataFromResponse(userData)
         );
 
         // Start with the empty User
@@ -140,7 +140,7 @@ export class APIUserDirector {
              setPhoneNumber('cell', object.cell).
              setPhoneNumber('phone', object.phone).
              setAvatar(object.picture.large).
-             setRegistrationDate(Date(object.registered));
+             setRegistrationDate(new Date(object.registered));
 
         // And resolve the promise with it
         resolve(user.build());
