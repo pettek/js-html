@@ -11,7 +11,10 @@ export class APIUserDirector {
 
   /**
    * Checks that API sent back and make it feasible for getUser method to run
-   * If there are some data missing, make them empty strings
+   * Prevents getUser from running into "cannot access property of undefined"
+   * error. If there are some data missing, make them empty strings (but this is
+   * customizable)
+   *
    * @param object
    * @returns {*}
    */
@@ -97,6 +100,11 @@ export class APIUserDirector {
     return object;
   }
 
+  /**
+   * Get into data provided by this specific API
+   * @param data
+   * @returns {*}
+   */
   static parseAPIResponse (data) {
     return data.results[0];
   }
