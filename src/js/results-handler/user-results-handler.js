@@ -4,6 +4,9 @@ const MALE_ICON = '<i class="fa fa-mars"></i>';
 const FEMALE_ICON = '<i class="fa fa-venus"></i>';
 const OTHER_ICON = '<i class="fa fa-genderless"></i>';
 
+/**
+ * User-specific DOM modification class
+ */
 export class UserResultsHandler extends ResultsHandler {
   /**
    * Return a font-awesome icon to represent gender graphically

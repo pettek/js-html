@@ -1,5 +1,8 @@
 import { Request } from './request';
 
+/**
+ * Encapsulates making multiple request at once. Not used anymore.
+ */
 export class RequestData {
   /**
    * @constructor Represent the request to the API

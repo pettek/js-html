@@ -1,5 +1,8 @@
 const HttpOKStatus = 200;
 
+/**
+ * Encapsulates the request to an API
+ */
 export class Request {
   /**
    * Request times out (rejects the Promise) after specified number of
