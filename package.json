@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --env.dev --inline --progress --config ./webpack.config.js",
     "build": "webpack --config ./webpack.config.js",
-    "precommit": "",
+    "precommit": "npm run lint",
     "lint": "eslint --max-warnings 0 ./src"
   },
   "author": "Piotr Olbrot",
