@@ -12,7 +12,6 @@ export class APIUserDirector {
   }
 
   /**
-   * @todo FIX THAT
    * Builds the user using builder and provided data
    * @returns {Promise<[*]>}
    */
@@ -20,9 +19,14 @@ export class APIUserDirector {
   getUser (endpoint) {
     return new Promise((resolve, reject) => {
       this.requestManager.get(endpoint).then((userData) => {
+
+        // Start with the empty User
         const user = this.builder.create();
+
+        // Get data as a parsed object from the API
         const object = APIUserDirector.parseAPIResponse(userData);
 
+        // Recipe for building a User
         user.setFirstName(object.name.first).
              setLastName(object.name.last).
              setGender(object.gender).
@@ -38,11 +42,15 @@ export class APIUserDirector {
              setAvatar(object.picture.large).
              setRegistrationDate(Date(object.registered));
 
+        // Return the final result to the new variable
         const finalUser = user.build();
 
+        // And resolve the promise with it
         resolve(finalUser);
       }).catch((error => {
+
         reject(error);
+
       }));
     });
   }

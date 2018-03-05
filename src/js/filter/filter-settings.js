@@ -1,5 +1,5 @@
-const MALE_FILTER = (user) => user.results[0].gender === 'male';
-const FEMALE_FILTER = (user) => user.results[0].gender === 'female';
+const MALE_FILTER = (user) => user.gender === 'male';
+const FEMALE_FILTER = (user) => user.gender === 'female';
 const NO_FILTER = (user) => true;
 
 export const FILTER_SETTINGS = {

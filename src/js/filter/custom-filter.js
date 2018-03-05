@@ -1,5 +1,5 @@
 /**
- * Custom filter does custom filtering xD
+ * Custom filter does custom filtering
  */
 export class CustomFilter {
   /**
