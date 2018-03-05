@@ -1,7 +1,7 @@
 import { Request }                       from './request/request';
 import { UserResultsHandler }            from './results-handler/user-results-handler';
 import { CustomFilter, FILTER_SETTINGS } from './filter';
-import { UserBuilder, APIUserDirector }  from './user';
+import { APIUserDirector }  from './user';
 
 // Specify API url and endpoints
 const API = 'https://randomuser.me';
@@ -19,8 +19,7 @@ export class App {
     this.root = root;
     this.requestHandler = new Request(API);
     this.filter = new CustomFilter(FILTER_SETTINGS);
-    this.usersAPIHandler = new APIUserDirector(new UserBuilder(),
-      this.requestHandler);
+    this.usersAPIHandler = new APIUserDirector(this.requestHandler);
   }
 
   /**
@@ -51,14 +50,14 @@ export class App {
         this.root.querySelector('[name="filter"]:checked').value);
 
       // Start from the empty container and show the loader
-      this.resultsHandler.clear();
+      this.resultsHandler.clear().loaderOn();
 
       const promiseArr = [];
 
       // Fill the array with promises that will be resolved into array of users
       for (let i = 0; i < this.userNumInput.value; i++) {
         promiseArr.push(
-          this.usersAPIHandler.getUser(ENDPOINT),
+          this.usersAPIHandler.getUser(ENDPOINT)
         );
       }
 
@@ -67,7 +66,8 @@ export class App {
         users.filter(genderFilter).forEach(user => {
           this.resultsHandler.display(user);
         });
-      }).catch((error) => console.log(error));
+      }).catch((error) => console.log(error))
+        .finally(() => this.resultsHandler.loaderOff());
     });
 
     // Clear the container if button responsible of clearing is pressed

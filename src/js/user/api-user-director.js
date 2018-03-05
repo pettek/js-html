@@ -1,9 +1,11 @@
+import {UserBuilder} from './user-builder';
+
 /**
  * Supervises the process of building the User
  */
 export class APIUserDirector {
-  constructor (builder, requestManager) {
-    this.builder = builder;
+  constructor (requestManager) {
+    this.builder = new UserBuilder;
     this.requestManager = requestManager;
   }
 
@@ -42,11 +44,9 @@ export class APIUserDirector {
              setAvatar(object.picture.large).
              setRegistrationDate(Date(object.registered));
 
-        // Return the final result to the new variable
-        const finalUser = user.build();
-
         // And resolve the promise with it
-        resolve(finalUser);
+        resolve(user.build());
+
       }).catch((error => {
 
         reject(error);
