@@ -22,6 +22,15 @@
     "valid-typeof": "warn",
     "eqeqeq": "error",
     "prefer-const": "warn",
-    "no-var": "error"
+    "no-var": "error",
+    "require-jsdoc": ["error", {
+      "require": {
+        "FunctionDeclaration": true,
+        "MethodDefinition": true,
+        "ClassDeclaration": true,
+        "ArrowFunctionExpression": false,
+        "FunctionExpression": true
+      }
+    }]
   }
 }

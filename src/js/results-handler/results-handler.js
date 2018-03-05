@@ -6,7 +6,8 @@ const SPINNER = '<i class="fa fa-circle-o-notch fa-spin text-primary" ' +
  */
 export class ResultsHandler {
   /**
-   * @constructor Represents a Handler that renders the HTML to show what API returned
+   * @constructor Represents a Handler that renders the HTML to show what API
+   *              returned
    * @param resultsContainer
    * @param spinner
    */

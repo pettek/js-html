@@ -6,6 +6,9 @@ import { CustomFilter, FILTER_SETTINGS } from '../filter';
 const API = 'https://randomuser.me';
 const ENDPOINT = 'api';
 
+/**
+ * Controller for Users
+ */
 export class UserController {
   /**
    * @constructor Gets all the dependencies and perform some actions on users

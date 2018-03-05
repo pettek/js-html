@@ -4,6 +4,10 @@ import { UserBuilder } from './user-builder';
  * Supervises the process of building the User
  */
 export class APIUserDirector {
+  /**
+   * @constructor Represents the director in Builder Pattern
+   * @param requestManager
+   */
   constructor (requestManager) {
     this.builder = new UserBuilder;
     this.requestManager = requestManager;

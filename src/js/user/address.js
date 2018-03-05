@@ -1,6 +1,9 @@
 /**
  * This class represents the Address
  */
+
+/* eslint-disable */
+
 export class Address {
   constructor () {
     this._city = this._street = this._zipCode = null;

@@ -1,6 +1,9 @@
 /**
  * This class represents the PhoneNumber
  */
+
+/* eslint-disable */
+
 export class PhoneNumber {
   constructor () {
     /** @type {String} */

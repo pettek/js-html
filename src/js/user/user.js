@@ -1,6 +1,9 @@
 /**
  * This class represents the User
  */
+
+/* eslint-disable */
+
 export class User {
   /**
    * @constructor
