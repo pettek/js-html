@@ -39,17 +39,17 @@ export class UserController {
     }
 
     // Resolve the array of promises, reject if any of the promises rejects
-    Promise.all(promiseArr)
-           .then(users => {
+    Promise.all(promiseArr).
+            then(users => {
               users.filter(genderFilter).forEach(user => {
                 this.resultsHandler.display(user);
               });
-            })
-           .catch((error) => console.error(error))
-           .finally(() => this.resultsHandler.loaderOff());
+            }).
+            catch((error) => console.error(error)).
+            finally(() => this.resultsHandler.loaderOff());
   }
 
-  clearDisplay() {
+  clearDisplay () {
     this.resultsHandler.clear();
   }
 }

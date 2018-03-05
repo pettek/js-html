@@ -23,7 +23,6 @@ export class RequestData {
   makeMultipleCalls (relPath, howMany = 1) {
     const promises = [];
 
-
     // Fill the array with as many promises as specified
     for (let i = 0; i < howMany; i++) {
       promises.push(new Request(this.baseUrl).get(relPath));

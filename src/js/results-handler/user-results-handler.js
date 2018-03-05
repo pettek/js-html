@@ -51,13 +51,13 @@ export class UserResultsHandler extends ResultsHandler {
 
     userDiv.innerHTML =
       '<div class="row my-2 user-row">' +
-        '<div class="col-lg-2 col-md-3">' +
-          '<img src="' + large + '" alt="user-photo" class="rounded">' +
-        '</div>' +
-        '<div class="col-lg-10 col-md-9">' +
-          '<h2 class="mt-4 text-capitalize">' + icon + ' ' + fullName + '</h2>'+
-          '<p class="text-muted">' + email + ' | ' + phone + '</p>' +
-        '</div>' +
+      '<div class="col-lg-2 col-md-3">' +
+      '<img src="' + large + '" alt="user-photo" class="rounded">' +
+      '</div>' +
+      '<div class="col-lg-10 col-md-9">' +
+      '<h2 class="mt-4 text-capitalize">' + icon + ' ' + fullName + '</h2>' +
+      '<p class="text-muted">' + email + ' | ' + phone + '</p>' +
+      '</div>' +
       '</div>';
 
     userDiv.classList.add('col-md-12');

@@ -34,7 +34,7 @@ export class Address {
    * Concatenate the whole address into the string
    * @returns {string}
    */
-  toString() {
+  toString () {
     return `${this.street} ${this.zipCode} ${this.city}`;
   }
 }

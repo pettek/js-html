@@ -112,8 +112,6 @@ export class UserBuilder {
     return this;
   }
 
-
-
   /**
    * Assign (push to the array) new phoneNumber to the user being created
    * @param {String} type

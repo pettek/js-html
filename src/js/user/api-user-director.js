@@ -110,17 +110,16 @@ export class APIUserDirector {
   }
 
   /**
-   * Builds the user using builder and provided data
-   * @returns {Promise<[*]>}
+   * Builds the user using UserBuilder and provided data
+   * @returns {Promise<*>}
    */
-
   getUser (endpoint) {
     return new Promise((resolve, reject) => {
       this.requestManager.get(endpoint).then((userData) => {
 
         // Get data as a parsed object from the API and validate it
         const object = APIUserDirector.validateJSONObject(
-          APIUserDirector.getDataFromResponse(userData)
+          APIUserDirector.getDataFromResponse(userData),
         );
 
         // Start with the empty User
