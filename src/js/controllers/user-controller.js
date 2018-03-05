@@ -45,7 +45,7 @@ export class UserController {
                 this.resultsHandler.display(user);
               });
             })
-           .catch((error) => console.log(error))
+           .catch((error) => console.error(error))
            .finally(() => this.resultsHandler.loaderOff());
   }
 
