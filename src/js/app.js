@@ -14,8 +14,7 @@ export class App {
   }
 
   /**
-   * Create all events that will enable for this app to run requests to a
-   * specific API
+   * Initialize controllers
    */
   run () {
     this.userController.init();
