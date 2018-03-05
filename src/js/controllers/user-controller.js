@@ -19,6 +19,8 @@ export class UserController {
     this.resultsContainer = this.root.querySelector('.api-results');
     this.spinnerContainer = this.root.querySelector('.spinner');
     this.userNumInput = this.root.querySelector('[name="users-number"]');
+    this.callBtn = this.root.querySelector('.request-btn');
+    this.clearBtn = this.root.querySelector('.clear-btn');
 
     this.requestHandler = new Request(API);
     this.filter = new CustomFilter(FILTER_SETTINGS);
@@ -26,6 +28,21 @@ export class UserController {
 
     this.resultsHandler =
       new UserResultsHandler(this.resultsContainer, this.spinnerContainer);
+  }
+
+  /**
+   * Bind functions to click events
+   */
+  init () {
+    // Bind click to making multiple requests to API and rendering results
+    this.callBtn.addEventListener('click', () => {
+      this.fetchFromAPI();
+    });
+
+    // Clear the container if button responsible of clearing is pressed
+    this.clearBtn.addEventListener('click', () => {
+      this.clearDisplay();
+    });
   }
 
   /**
