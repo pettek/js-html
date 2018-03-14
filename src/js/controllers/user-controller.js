@@ -1,10 +1,10 @@
 import { UserResultsHandler }            from '../results-handler/user-results-handler';
-import { APIUserDirector }               from '../user';
+import { CustomAPIUserDirector }         from '../user';
 import { Request }                       from '../request/request';
 import { CustomFilter, FILTER_SETTINGS } from '../filter';
 
-const API = 'https://randomuser.me';
-const ENDPOINT = 'api';
+const API = 'http://192.168.109.247:8080';
+const ENDPOINT = '/api/user/random/1/';
 
 /**
  * Controller for Users
@@ -24,7 +24,7 @@ export class UserController {
 
     this.requestHandler = new Request(API);
     this.filter = new CustomFilter(FILTER_SETTINGS);
-    this.usersAPIHandler = new APIUserDirector(this.requestHandler);
+    this.usersAPIHandler = new CustomAPIUserDirector(this.requestHandler);
 
     this.resultsHandler =
       new UserResultsHandler(this.resultsContainer, this.spinnerContainer);
