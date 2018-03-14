@@ -29,6 +29,13 @@ const webpackConfig = {
       fallbackModuleFilenameTemplate: '[absolute-resource-path]',
     }),
   ],
+  devServer: {
+    inline: true,
+    compress: true,
+    port: 3000,
+    host: '192.168.109.247',
+    disableHostCheck: true
+  }
 };
 
 module.exports = webpackConfig;
