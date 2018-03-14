@@ -26,7 +26,6 @@ export class CustomAPIUserDirector {
 
     if (!object) {
       object = {};
-      console.error('JSON returned from API invalid');
     }
 
     if (!object.name || !object.name.first || !object.name.last) {
@@ -34,14 +33,10 @@ export class CustomAPIUserDirector {
         first: object.firstName || '',
         last: object.lastName || '',
       };
-
-      console.error('Invalid name data from API');
     }
 
     if (!object.gender) {
       object.gender = '';
-
-      console.error('Invalid gender data from API');
     }
 
     if (!object.login || !object.login.username || !object.login.salt ||
@@ -52,8 +47,6 @@ export class CustomAPIUserDirector {
         salt: object.salt || '',
         sha256: object.password || '',
       };
-
-      console.error('Invalid login data from API');
     }
 
     if (!object.location || !object.location.city ||
@@ -64,32 +57,22 @@ export class CustomAPIUserDirector {
         postcode: object.location.zipCode || '',
         street: object.location.street || '',
       };
-
-      console.error('Invalid location data from API');
     }
 
     if (!object.email) {
       object.email = '';
-
-      console.error('Invalid email data from API');
     }
 
     if (!object.cell) {
       object.cell = object.telephones[0].number;
-
-      console.error('Invalid cell phone data from API');
     }
 
     if (!object.phone) {
       object.phone = object.telephones[1].number;
-
-      console.error('Invalid phone data from API');
     }
 
     if (!object.registered) {
       object.registered = '';
-
-      console.error('Invalid registration date data from API');
     }
 
     if (!object.picture || !object.picture.large) {
@@ -97,8 +80,6 @@ export class CustomAPIUserDirector {
       object.picture = {
         large: '../src/img/user-placeholder.png',
       };
-
-      console.error('Invalid avatar data from API');
     }
 
     return object;
