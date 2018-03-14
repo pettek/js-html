@@ -3,7 +3,7 @@ import { UserBuilder } from './user-builder';
 /**
  * Supervises the process of building the User
  */
-export class APIUserDirector {
+export class CustomAPIUserDirector {
   /**
    * @constructor Represents the director in Builder Pattern
    * @param requestManager
@@ -31,8 +31,8 @@ export class APIUserDirector {
 
     if (!object.name || !object.name.first || !object.name.last) {
       object.name = {
-        first: object.name.first || '',
-        last: object.name.last || '',
+        first: object.firstName || '',
+        last: object.lastName || '',
       };
 
       console.error('Invalid name data from API');
@@ -48,9 +48,9 @@ export class APIUserDirector {
       !object.login.sha256) {
 
       object.login = {
-        username: object.login.username || '',
-        salt: object.login.salt || '',
-        sha256: object.login.sha256 || '',
+        username: object.username || '',
+        salt: object.salt || '',
+        sha256: object.password || '',
       };
 
       console.error('Invalid login data from API');
@@ -60,9 +60,9 @@ export class APIUserDirector {
       !object.location.postcode || !object.location.street) {
 
       object.location = {
-        city: object.login.city || '',
-        postcode: object.login.postcode || '',
-        street: object.login.street || '',
+        city: object.location.city || '',
+        postcode: object.location.zipCode || '',
+        street: object.location.street || '',
       };
 
       console.error('Invalid location data from API');
@@ -75,13 +75,13 @@ export class APIUserDirector {
     }
 
     if (!object.cell) {
-      object.cell = '';
+      object.cell = object.telephones[0].number;
 
       console.error('Invalid cell phone data from API');
     }
 
     if (!object.phone) {
-      object.phone = '';
+      object.phone = object.telephones[1].number;
 
       console.error('Invalid phone data from API');
     }
@@ -95,7 +95,7 @@ export class APIUserDirector {
     if (!object.picture || !object.picture.large) {
 
       object.picture = {
-        large: object.picture.large || '',
+        large: '../src/img/user-placeholder.png',
       };
 
       console.error('Invalid avatar data from API');
@@ -110,7 +110,7 @@ export class APIUserDirector {
    * @returns {*}
    */
   static getDataFromResponse (data) {
-    return data.results[0];
+    return data[0];
   }
 
   /**
@@ -122,8 +122,8 @@ export class APIUserDirector {
       this.requestManager.get(endpoint).then((userData) => {
 
         // Get data as a parsed object from the API and validate it
-        const object = APIUserDirector.validateJSONObject(
-          APIUserDirector.getDataFromResponse(userData));
+        const object = CustomAPIUserDirector.validateJSONObject(
+          CustomAPIUserDirector.getDataFromResponse(userData));
 
         // Start with the empty User
         const user = this.builder.create();
