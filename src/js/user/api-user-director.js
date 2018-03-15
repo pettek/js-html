@@ -1,16 +1,15 @@
-import { UserBuilder } from './user-builder';
+import { UserDirector }          from './user-director';
 
 /**
  * Supervises the process of building the User
  */
-export class APIUserDirector {
+export class APIUserDirector extends UserDirector {
   /**
    * @constructor Represents the director in Builder Pattern
    * @param requestManager
    */
   constructor (requestManager) {
-    this.builder = new UserBuilder;
-    this.requestManager = requestManager;
+    super(requestManager);
   }
 
   /**
@@ -22,7 +21,7 @@ export class APIUserDirector {
    * @param object
    * @returns {*}
    */
-  static validateJSONObject (object) {
+  validateJSONObject (object) {
 
     if (!object) {
       object = {};
@@ -109,49 +108,17 @@ export class APIUserDirector {
    * @param data
    * @returns {*}
    */
-  static getDataFromResponse (data) {
+  getDataFromResponse (data) {
     return data.results[0];
   }
 
   /**
-   * Builds the user using UserBuilder and provided data
-   * @returns {Promise<*>}
+   *
+   * @param endpoint
+   * @returns {*}
    */
-  getUser (endpoint) {
-    return new Promise((resolve, reject) => {
-      this.requestManager.get(endpoint).then((userData) => {
-
-        // Get data as a parsed object from the API and validate it
-        const object = APIUserDirector.validateJSONObject(
-          APIUserDirector.getDataFromResponse(userData));
-
-        // Start with the empty User
-        const user = this.builder.create();
-
-        // Recipe for building a User
-        user.setFirstName(object.name.first).
-             setLastName(object.name.last).
-             setGender(object.gender).
-             setUserName(object.login.username).
-             setPassword(object.login.sha256).
-             setSalt(object.login.salt).
-             setAddress(object.location.city,
-               object.location.postcode,
-               object.location.street).
-             setEmail(object.email).
-             setPhoneNumber('cell', object.cell).
-             setPhoneNumber('phone', object.phone).
-             setAvatar(object.picture.large).
-             setRegistrationDate(new Date(object.registered));
-
-        // And resolve the promise with it
-        resolve(user.build());
-
-      }).catch((error => {
-
-        reject(error);
-
-      }));
-    });
+  getUser(endpoint) {
+    // Get data as a parsed object from the API and validate it
+    return super.getUser(endpoint, this);
   }
 }
