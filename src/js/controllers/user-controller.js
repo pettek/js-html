@@ -1,10 +1,6 @@
-import { UserResultsHandler }            from '../results-handler/user-results-handler';
-import { CustomAPIUserDirector }         from '../user';
-import { Request }                       from '../request/request';
-import { CustomFilter, FILTER_SETTINGS } from '../filter';
-
-const API = 'http://192.168.109.247:8080';
-const ENDPOINT = '/api/user/random/1/';
+import { UserResultsHandler }                     from '../results-handler/user-results-handler';
+import { CustomFilter, FILTER_SETTINGS }          from '../filter';
+import { UserFactory }                            from '../user';
 
 /**
  * Controller for Users
@@ -22,9 +18,7 @@ export class UserController {
     this.callBtn = this.root.querySelector('.request-btn');
     this.clearBtn = this.root.querySelector('.clear-btn');
 
-    this.requestHandler = new Request(API);
     this.filter = new CustomFilter(FILTER_SETTINGS);
-    this.usersAPIHandler = new CustomAPIUserDirector(this.requestHandler);
 
     this.resultsHandler =
       new UserResultsHandler(this.resultsContainer, this.spinnerContainer);
@@ -68,7 +62,7 @@ export class UserController {
     // Fill the array with promises that will be resolved into array of users
     for (let i = 0; i < this.userNumInput.value; i++) {
       promiseArr.push(
-        this.usersAPIHandler.getUser(ENDPOINT));
+        UserFactory.getUser());
     }
 
     // Resolve the array of promises, reject if any of the promises rejects
